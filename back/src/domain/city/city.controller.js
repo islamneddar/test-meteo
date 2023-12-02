@@ -30,14 +30,11 @@ export class CityController {
       let forecast = await this.cityService.getForecastForId(id);
       if(!forecast || forecast.length === 0){
         forecast = await this.meteoService.getForecastByCityInsee({cityInsee : id });
-        forecast = forecast.forecast.map((forecast) => {
+        forecast = forecast.map((forecast) => {
           const forecastIcon =weatherUtils.getIconByCode(forecast.weather)
           return {
-            day : forecast.day,
+            ...forecast,
             icon : forecastIcon,
-            probRain : forecast.probarain,
-            tmin: forecast.tmin,
-            tmax: forecast.tmax,
           }
         })
       }else{

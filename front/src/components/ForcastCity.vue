@@ -11,7 +11,6 @@ const fetchForecastData = async (cityInsee) => {
   isLoading.value = true;
   try{
     const data = await cityService().getForecastForId(cityInsee);
-    console.log(data);
     citiesForecast.value = data;
   }catch (e) {
     console.log(e);

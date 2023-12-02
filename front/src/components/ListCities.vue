@@ -16,7 +16,6 @@ const fetchCitiesData = async () => {
   isLoading.value = true;
   try{
     const data = await cityService().getAllCity()
-    console.log(data);
     cities.value = data;
   }catch (e) {
     console.log(e);

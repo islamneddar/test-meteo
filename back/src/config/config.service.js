@@ -7,7 +7,6 @@ export class ConfigService {
 
   getMeteoApiToken() {
     const meteoApiToken= process.env.API_TOKEN_METEO;
-    console.log("meteoApiToken", meteoApiToken)
     return meteoApiToken;
   }
 }
