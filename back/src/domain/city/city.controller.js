@@ -1,4 +1,5 @@
 import statusResponse from '../../common/constant/status-response.js';
+import weatherUtils from '../../utils/weatherUtils.js';
 
 export class CityController {
   constructor({ cityService, meteoService }) {
@@ -29,6 +30,18 @@ export class CityController {
       let forecast = await this.cityService.getForecastForId(id);
       if(!forecast || forecast.length === 0){
         forecast = await this.meteoService.getForecastByCityInsee({cityInsee : id });
+        forecast = forecast.forecast.map((forecast) => {
+          const forecastIcon =weatherUtils.getIconByCode(forecast.weather)
+          return {
+            day : forecast.day,
+            icon : forecastIcon,
+            probRain : forecast.probarain,
+            tmin: forecast.tmin,
+            tmax: forecast.tmax,
+          }
+        })
+      }else{
+        forecast = JSON.parse(forecast)
       }
       res.status(statusResponse.STATUS_OK).json(forecast);
     }catch (error) {

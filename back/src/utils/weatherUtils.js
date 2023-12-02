@@ -48,4 +48,4 @@ weatherUtils.getIconByCode = function (weatherCode) {
   return null;
 };
 
-module.exports = weatherUtils;
+export default weatherUtils

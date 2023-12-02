@@ -1,5 +1,5 @@
 <template>
-  <div class='flex flex-row'>
+  <div class=''>
     <ListCities></ListCities>
     <ForcastCity></ForcastCity>
   </div>

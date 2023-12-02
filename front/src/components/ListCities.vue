@@ -25,7 +25,7 @@ const selectCity = (city) => {
 </script>
 
 <template>
- <div class='flex-1 p-5'>
+ <div class=' p-5 w-96'>
    <table class="w-full divide-y divide-gray-300">
      <thead>
      <tr>
