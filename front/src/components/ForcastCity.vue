@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
 import { store } from '@/store';
+import { cityService } from '@/service/city.service';
 
 const citiesForecast = ref([]);
 const isLoading = ref(false);
@@ -9,8 +10,7 @@ const isLoading = ref(false);
 const fetchForecastData = async (cityInsee) => {
   isLoading.value = true;
   try{
-    const response = await fetch(`http://localhost:3000/v1/cities/${cityInsee}/forecast/`);
-    const data = await response.json();
+    const data = await cityService().getForecastForId(cityInsee);
     console.log(data);
     citiesForecast.value = data;
   }catch (e) {
@@ -22,7 +22,6 @@ const fetchForecastData = async (cityInsee) => {
 }
 
 watchEffect(() => {
-  console.log('cityInsee changed to ', store.cityInsee);
   const cityInsee = store.cityInsee;
   if (cityInsee) {
     fetchForecastData(cityInsee);
@@ -32,8 +31,11 @@ watchEffect(() => {
 </script>
 
 <template>
-<div class='flex-1 sticky '>
+<div class='flex-1'>
   <span v-if="isLoading">Loading...</span>
+  <div v-else-if="!citiesForecast.length">
+    <span class='text-xl'>Selectionnez une ville pour avoit toutes les prevision en cliqaunt sur une ligne de la table city</span>
+  </div>
   <div v-else class='grid grid-cols-2 gap-4'>
     <div v-for="forecast in citiesForecast" :key="forecast.day" class='border-1 border-black border p-3'>
         <div class='pb-2'>

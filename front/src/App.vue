@@ -1,5 +1,5 @@
 <template>
-  <div class=''>
+  <div class='flex'>
     <ListCities></ListCities>
     <ForcastCity></ForcastCity>
   </div>
