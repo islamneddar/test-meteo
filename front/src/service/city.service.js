@@ -7,6 +7,11 @@ export const cityService = () => {
     return await response.json();
   }
 
+  const getAllCityByPagination = async ({ page, take }) => {
+    const response = await fetch(`${endpoint}/cities?page=${page}&take=${take}`);
+    return await response.json();
+  }
+
   const getForecastForId = async (id) => {
     const response = await fetch(`${endpoint}/cities/${id}/forecast`);
     return await response.json();
@@ -15,6 +20,7 @@ export const cityService = () => {
   return {
     getAllCity,
     getForecastForId,
+    getAllCityByPagination
   }
 }
 
